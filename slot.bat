@@ -1,6 +1,7 @@
 @ECHO OFF
 ::
 :: 2019-07-11
+:: Update: 2019-08-01
 ::
 
 SETLOCAL
@@ -11,11 +12,11 @@ SET day=%DATE:~-2%
 
 :: only for testing
 ::
-::SET mon=12
-::SET day=26
+::SET mon=11
+::SET day=08
 
 
-FOR /L %%n IN (90,-1,1) DO (
+FOR /L %%n IN (0,1,90) DO (
 	CALL :next %%n
 )
 
@@ -28,18 +29,19 @@ GOTO :EOF
 
 :next
 SET idx=%1
-SET /A share=(%day%+%1) / 31
-SET /A rest=(%day%+%1) %% 31
-SET /A trest30=%rest% + 101
+SET /A tday=1%day% - 100
+SET /A share=(%tday% + %idx%) / 31
+SET /A trest30=(%tday% + %idx%) %% 31 + 101
 
-SET /A tmon1=((%mon% + 1) %% 12) + 100
-SET /A tmon2=((%mon% + 2) %% 12) + 100
-SET /A tmon3=((%mon% + 3) %% 12) + 100
+SET /a m0=1%mon% - 100
+SET /a m1=(m0 + 0) %% 12 + 101
+SET /a m2=(m0 + 1) %% 12 + 101
+SET /a m3=(m0 + 2) %% 12 + 101
 
 SET rest30=%trest30:~1,2%
-SET mon1=%tmon1:~1,2%
-SET mon2=%tmon2:~1,2%
-SET mon3=%tmon3:~1,2%
+SET mon1=%m1:~1,2%
+SET mon2=%m2:~1,2%
+SET mon3=%m3:~1,2%
 
 
 IF %share% EQU 0 (

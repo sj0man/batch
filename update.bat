@@ -3,7 +3,7 @@
 ::
 :: Update from laptop to external storage.
 ::
-:: 2018-10-10
+:: 2019-02-08
 ::
 ::
 ::echo robocopy "%HOME%\%%d" "%BKUPDIR%\%%d" %COPYOPT% %LOGOPT%
@@ -29,7 +29,6 @@ set D7=Music
 
 set M1=Dropbox
 set M2=OneDrive
-set M3=Working
 
 
 for /f "tokens=1-3 delims=- " %%A in ('echo %DATE%') do (set YY=%%A&SET MM=%%B&SET DD=%%C)
@@ -51,7 +50,7 @@ echo Begin: %T1%
 echo =======================
 echo.
 
-for %%d in (%D1% %D2% %D3% %D4% %D5% %D6% %D7% %M1% %M2% %M3%) do (
+for %%d in (%D1% %D2% %D3% %D4% %D5% %D6% %D7% %M1% %M2%) do (
 	if not exist %HOME%\%%d (
 		echo =======================
 		echo not found %HOME%\%%d
