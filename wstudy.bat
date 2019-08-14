@@ -4,6 +4,7 @@
 :: Update: 2019-07-12
 :: Update: 2019-07-23
 :: Update: 2019-07-27
+:: Update: 2019-08-01
 ::
 
 SETLOCAL
@@ -18,19 +19,18 @@ SET fn=%mon%%day%.xlsx
 ::SET fn=0728.xlsx
 
 
-SET /A thour=%TIME:~0,2% + 100
-::SET thour=115
+SET /A thour=1%TIME:~0,2%
 SET hour=%thour:~1,2%
 SET minute=%TIME:~3,2%
 SET second=%TIME:~6,2%
-SET tf=t%hour%%minute%%second%.txt
+SET tf=tmp%hour%%minute%%second%.txt
 SET findfile=ff.bat
 
 
 IF NOT EXIST %logdir%		ECHO %logdir% & MKDIR %logdir%
 
 DIR /s /b %fn% > %tf% 2> NUL 
-IF NOT %errorlevel% == 0 	(ECHO. & ECHO Done! & GOTO :finish)
+IF NOT %errorlevel% == 0 	(ECHO. & ECHO All Done! & GOTO :finish)
 
 SET T1=%TIME%
 ECHO =======================
