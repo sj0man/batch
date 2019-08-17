@@ -6,6 +6,7 @@
 :: Update: 2019-07-27
 :: Update: 2019-08-01
 :: Update: 2019-08-10
+:: Update: 2019-08-17
 ::
 
 SETLOCAL
@@ -16,9 +17,15 @@ SET logfile=%COMPUTERNAME%_%USERNAME%_%DATE%.log
 SET xls="C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
 SET mon=%DATE:~5,2%
 SET day=%DATE:~-2%
-SET fn=%mon%%day%.xlsx
-::SET fn=0808.xlsx
 
+SET fn=%mon%%day%.xlsx
+IF "%1" == "" 	GOTO :skip
+
+:: use date by entering manually
+::
+SET fn=%1.xlsx
+
+:skip
 
 SET tm=%TIME: =0%
 SET hour=%tm:~0,2%
