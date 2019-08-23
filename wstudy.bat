@@ -40,7 +40,7 @@ IF NOT EXIST %logdir%		ECHO %logdir% & MKDIR %logdir%
 DIR /s /b %fn% > %tf% 2> NUL 
 IF NOT %errorlevel% == 0 	(ECHO. & ECHO All Done! & GOTO :finish)
 
-SET T1=%TIME%
+SET T1=%TIME: =0%
 ECHO =======================
 TYPE %tf% | FIND "" /v /c
 ECHO =======================
@@ -53,7 +53,7 @@ FOR /F "delims=" %%i IN (%tf%) DO (
 	PAUSE
 )
 
-SET T2=%TIME%
+SET T2=%TIME: =0%
 CALL :DIFF %T1% %T2%
 ECHO.
 ECHO =======================
