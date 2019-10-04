@@ -1,14 +1,16 @@
 @ECHO OFF
 ::
 :: 2019-07-11
-:: Update: 2019-08-01
+:: 2019-08-01
+:: 2019-10-04
 ::
 
 SETLOCAL
 
-SET tdir="C:\Users\sj0man\Google 드라이브\1.단어장\90일후 (3달후)"
+SET tdir=".\90일후 (3달후)"
 SET mon=%DATE:~5,2%
 SET day=%DATE:~-2%
+SET debugFlag=0
 
 :: only for testing
 ::
@@ -16,7 +18,7 @@ SET day=%DATE:~-2%
 ::SET day=08
 
 
-FOR /L %%n IN (0,1,90) DO (
+FOR /L %%n IN (0,1,91) DO (
 	CALL :next %%n
 )
 
@@ -45,12 +47,16 @@ SET mon3=%m3:~1,2%
 
 
 IF %share% EQU 0 (
+	IF "%debugFlag%" equ "1"	ECHO debug: %mon%%rest30%.xlsx	
 	IF NOT EXIST %tdir%\%mon%%rest30%.xlsx	ECHO %mon%%rest30%.xlsx	
 ) ELSE IF %share% EQU 1 (
+	IF "%debugFlag%" equ "1"	ECHO debug: %mon1%%rest30%.xlsx	
 	IF NOT EXIST %tdir%\%mon1%%rest30%.xlsx	ECHO %mon1%%rest30%.xlsx	
 ) ELSE IF %share% EQU 2 (
+	IF "%debugFlag%" equ "1"	ECHO debug: %mon2%%rest30%.xlsx	
 	IF NOT EXIST %tdir%\%mon2%%rest30%.xlsx	ECHO %mon2%%rest30%.xlsx	
 ) ELSE IF %share% EQU 3 (
+	IF "%debugFlag%" equ "1"	ECHO debug: %mon3%%rest30%.xlsx	
 	IF NOT EXIST %tdir%\%mon3%%rest30%.xlsx	ECHO %mon3%%rest30%.xlsx	
 )
 

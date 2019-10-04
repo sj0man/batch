@@ -7,6 +7,7 @@
 :: Update: 2019-08-01
 :: Update: 2019-08-10
 :: Update: 2019-08-17
+:: Update: 2019-10-04
 ::
 
 SETLOCAL
@@ -14,6 +15,9 @@ SETLOCAL
 SET logdir=.\Logs
 SET logfile=%COMPUTERNAME%_%USERNAME%_%DATE%.log
 
+:: Office 2013
+::SET xls="C:\Program Files\Microsoft Office 15\root\office15\EXCEL.EXE"
+:: Office 2016
 SET xls="C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
 SET mon=%DATE:~5,2%
 SET day=%DATE:~-2%
