@@ -1,12 +1,17 @@
 @ECHO OFF
 ::
 :: 2019-12-25
+:: 2020-01-11
 ::
 
 SETLOCAL
 
 set TPATH=C:\Users\%USERNAME%\AppData\Roaming\uTorrent\updates
 set TFILE=utorrentie.exe
+
+echo.
+dir /b %TPATH%
+echo.
 
 for /f %%A in ('dir /b /a:d /o:-n %TPATH%') do (set TDIR=%%A&& goto :first)
 
