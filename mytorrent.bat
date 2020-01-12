@@ -2,6 +2,7 @@
 ::
 :: 2019-12-25
 :: 2020-01-11
+:: 2020-01-12
 ::
 
 SETLOCAL
@@ -40,8 +41,9 @@ if exist %TPATH%\%TDIR%\%TFILE% (
 ::
 if not exist %TPATH%\%TDIR%\%TFILE% (
 	type NUL > %TPATH%\%TDIR%\%TFILE%
-
-	echo created %TPATH%\%TDIR%\%TFILE%
+	attrib +r %TPATH%\%TDIR%\%TFILE%
+	
+	echo created readonly %TPATH%\%TDIR%\%TFILE%
 	echo.
 )
 
