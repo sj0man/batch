@@ -10,10 +10,8 @@ SETLOCAL
 set TPATH=C:\Users\%USERNAME%\AppData\Roaming\uTorrent\updates
 set TFILE=utorrentie.exe
 
-echo.
-dir /b %TPATH%
-echo.
-
+:: select latest directory
+::
 for /f %%A in ('dir /b /a:d /o:-n %TPATH%') do (set TDIR=%%A&& goto :first)
 
 
@@ -22,6 +20,10 @@ if not exist %TPATH%\%TDIR%\%TFILE% (
 	echo not found
 	exit /b
 )
+
+echo.
+dir %TPATH%\%TDIR%
+echo.
 
 :: rename command cannot assign target directory
 ::
