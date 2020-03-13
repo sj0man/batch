@@ -1,117 +1,121 @@
-@ECHO OFF
+@echo off
 ::
-:: 2019-06-29
-:: Update: 2019-07-12
-:: Update: 2019-07-23
-:: Update: 2019-07-27
-:: Update: 2019-08-01
-:: Update: 2019-08-10
-:: Update: 2019-08-17
-:: Update: 2019-10-04
 :: 2019-11-12
+:: 2020-03-13
 ::
 
-SETLOCAL
+setlocal
 
-SET logdir=.\Logs
-SET logfile=%COMPUTERNAME%_%USERNAME%_%DATE%.log
+set LOGDIR=.\Logs
+set LOGFILE=%COMPUTERNAME%_%USERNAME%.log
+set LFILE=%LOGDIR%\%LOGFILE%
+set FINDFILE=ff.bat
 
 
 if "%USERNAME%" == "iam0man" (
 :: Office 2013
-	SET xls="C:\Program Files\Microsoft Office 15\root\office15\EXCEL.EXE"
+	set EXCEL="C:\Program Files\Microsoft Office 15\root\office15\EXCEL.EXE"
 ) else (
 :: Office 2016
-	SET xls="C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
+	set EXCEL="C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
 )
-SET mon=%DATE:~5,2%
-SET day=%DATE:~-2%
 
-SET fn=%mon%%day%.xlsx
-IF "%1" == "" 	GOTO :skip
 
+:: set target file name automatically
+::
+set MON=%DATE:~5,2%
+set DAY=%DATE:~-2%
+set FN=%MON%%DAY%.xlsx
+if "%1" == "" 	goto :SKIP
 :: use date by entering manually
 ::
-SET fn=%1.xlsx
-
-:skip
-
-SET tm=%TIME: =0%
-SET hour=%tm:~0,2%
-SET minute=%tm:~3,2%
-SET second=%tm:~6,2%
-SET tf=tmp%hour%%minute%%second%.txt
-SET findfile=ff.bat
+set FN=%1.xlsx
 
 
-IF NOT EXIST %logdir%		ECHO %logdir% & MKDIR %logdir%
-
-DIR /s /b %fn% > %tf% 2> NUL 
-IF NOT %errorlevel% == 0 	(ECHO. & ECHO All Done! & GOTO :finish)
-
-SET T1=%TIME: =0%
-ECHO =======================
-TYPE %tf% | FIND "" /v /c
-ECHO =======================
+:SKIP
+set TM=%TIME: =0%
+set HOUR=%TM:~0,2%
+set MINUTE=%TM:~3,2%
+set SECOND=%TM:~6,2%
+set TF=tmp%HOUR%%MINUTE%%SECOND%.txt
 
 
+if not exist %LOGDIR%		echo %LOGDIR% & mkdir %LOGDIR%
 
-FOR /F "delims=" %%i IN (%tf%) DO (	
-	ECHO. & ECHO %%i & ECHO.
-	%xls% "%%i"
-	PAUSE
+dir /s /b %FN% > %TF% 2> NUL 
+if not %errorlevel% == 0 	(echo. & echo All Done! & goto :FINISH)
+for /f "tokens=* usebackq" %%F in (`type %TF% ^| find "" /v /c`) do (set FCOUND=%%F)
+set T1=%TIME: =0%
+
+echo =======================
+echo %FCOUND%
+echo =======================
+
+::
+:: debugging point
+::
+:: goto :FINISH
+
+
+:: execute excel each file
+::
+for /F "delims=" %%i in (%TF%) do (	
+	echo. & echo %%i & echo.
+	%EXCEL% "%%i"
+	pause
 )
 
-SET T2=%TIME: =0%
+set T2=%TIME: =0%
 CALL :DIFF %T1% %T2%
-ECHO.
-ECHO =======================
-ECHO Finish: %T2% (%DURATION%)
-ECHO =======================
+echo.
+echo =======================
+echo Finish: %T2% (%DURATION%)
+echo =======================
 
 
 
 
-ECHO.
-FOR /F "delims=" %%i IN (%tf%) DO ECHO %%i
-ECHO ==================================================
-SET /p yn="Delete all %fn%? (y/n): "
+echo.
+for /F "delims=" %%i in (%TF%) do echo %%i
+echo ==================================================
+set /p YN="Delete all %FN%? (y/n): "
 ::
 :: When you compare the string, you should wrap the double quatation.
 ::
-IF NOT "%yn%"=="y" GOTO :finish
-FOR /F "delims=" %%i IN (%tf%) DO (
+if not "%YN%"=="y" goto :FINISH
+for /F "delims=" %%i in (%TF%) do (
 	del "%%i"
 )
-
-ECHO =======================
-CALL %findfile% %fn%
-ECHO =======================
-
-::
-:: Collect log data before deleting files.
-::
-ECHO ======================= >> %logdir%\%logfile%
-ECHO %DATE% >> %logdir%\%logfile%
-ECHO Begin: %T1% >> %logdir%\%logfile%
-ECHO End: %T2% >> %logdir%\%logfile%
-ECHO Duration: %DURATION% >> %logdir%\%logfile%
-ECHO ======================= >> %logdir%\%logfile%
-TYPE %tf% >> %logdir%\%logfile%
-ECHO. >> %logdir%\%logfile%
 
 
 ::
 :: call external batch file and send parameter.
 ::
+echo =======================
+CALL %FINDFILE% %FN%
+echo =======================
 
-:finish
-DEL %tf% 2> NUL
-ECHO.
 
-ENDLOCAL
-PAUSE
-GOTO :EOF
+
+::
+:: Collect log data before deleting files.
+::
+echo {>> %LFILE%
+echo 	"Target":"%FN%",>> %LFILE%
+echo 	"Begin":"%DATE%T%T1%",>> %LFILE%
+echo 	"End":"%DATE%T%T2%",>> %LFILE%
+echo 	"Duration":"%DURATION%",>> %LFILE%
+echo 	"Files":"%FCOUND%">> %LFILE%
+echo }>> %LFILE%
+
+
+:FINISH
+del %TF% 2> NUL
+echo.
+
+endlocal
+pause
+goto :EOF
 
 
 
