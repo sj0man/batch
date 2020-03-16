@@ -1,11 +1,12 @@
 @echo off
 ::
-:: 2019-11-12
 :: 2020-03-13
+:: 2020-03-16
 ::
 
 setlocal
 
+set LOGVER=2
 set LOGDIR=.\Logs
 set LOGFILE=%COMPUTERNAME%_%USERNAME%.log
 set LFILE=%LOGDIR%\%LOGFILE%
@@ -105,7 +106,9 @@ echo 	"Target":"%FN%",>> %LFILE%
 echo 	"Begin":"%DATE%T%T1%",>> %LFILE%
 echo 	"End":"%DATE%T%T2%",>> %LFILE%
 echo 	"Duration":"%DURATION%",>> %LFILE%
-echo 	"Files":"%FCOUND%">> %LFILE%
+echo 	"Files":"%FCOUND%",>> %LFILE%
+echo 	"Version":"%LOGVER%",>> %LFILE%
+echo 	"Host":"%COMPUTERNAME%",>> %LFILE%
 echo }>> %LFILE%
 
 

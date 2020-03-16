@@ -1,41 +1,42 @@
 @ECHO OFF
 ::
-:: 2019-06-26
 :: 2019-09-18
+:: 2020-03-16
 ::
 
-SETLOCAL
+setlocal
 
-IF "%1" == "" 	GOTO :enter
+if "%1" == "" 	goto :ENTER
 
 :: there is a argument.
 ::
-SET name="%1*"
-ECHO.
-DIR /s /b %name% 2> NUL | FIND "" /v /c
-ECHO.
+set NAME="%1*"
+echo.
+dir /s /b %NAME% 2> nul | find "" /v /c
+echo.
 
-GOTO :EOF
-
-
-
-:enter
-ECHO.
-SET /P n1="Enter the name: "
-SET name="%n1%*"
-
-IF %name% NEQ "*"		GOTO :search
-SET mmdd=%date:~5,2%%date:~-2%
-SET name="%mmdd%*"
-ECHO %mmdd%
+endlocal
+goto :EOF
 
 
 
-:search
-ECHO.
-DIR /s /b %name% 2> NUL | FIND "" /v /c
-ECHO.
+:ENTER
+echo.
+set /P n1="Enter the name: "
+set NAME="%n1%*"
+
+if %NAME% NEQ "*"		goto :SEARCH
+set mmdd=%date:~5,2%%date:~-2%
+set NAME="%mmdd%*"
+echo %mmdd%
 
 
-PAUSE
-GOTO :EOF
+
+:SEARCH
+echo.
+dir /s /b %NAME% 2> NUL | find "" /v /c
+echo.
+
+endlocal
+pause
+goto :EOF
