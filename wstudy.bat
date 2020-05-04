@@ -1,7 +1,7 @@
 @echo off
 ::
-:: 2020-03-13
 :: 2020-03-16
+:: 2020-05-04
 ::
 
 setlocal
@@ -11,6 +11,7 @@ set LOGDIR=.\Logs
 set LOGFILE=%COMPUTERNAME%_%USERNAME%.log
 set LFILE=%LOGDIR%\%LOGFILE%
 set FINDFILE=ff.bat
+set WORDBOOK=MyWordBook.xlsx
 
 
 if "%USERNAME%" == "iam0man" (
@@ -56,6 +57,10 @@ echo =======================
 :: debugging point
 ::
 :: goto :FINISH
+
+:: start excel background
+::
+start %WORDBOOK%
 
 
 :: execute excel each file
