@@ -61,7 +61,7 @@ echo =======================
 :: start excel background
 ::
 start %WORDBOOK%
-
+timeout /t 1 > NUL
 
 :: execute excel each file
 ::
