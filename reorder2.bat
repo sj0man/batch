@@ -3,33 +3,41 @@
 :: file name should be started "e "
 ::
 
-SETLOCAL
+setlocal
 
-SET total=11
-SET jump=4
-SET last_page=43
-
-
-FOR /l %%i IN (1,1,%total%) DO (
-	CALL :func %%i
+if "%1" == "" (
+	set EXE_RENAME=0
+) else (
+	set EXE_RENAME=1
 )
 
-GOTO :EOF
+set START_IDX=1
+set END_IDX=10
+set JUMP=2
+
+
+for /l %%i in (%END_IDX%,-1,%START_IDX%) do (
+	call :func %%i
+)
+
+goto :EOF
 
 
 
 
 :func
 
-SET arg=%1
-SET fname="e %arg%.pdf"
+set arg=%1
+set fname="e %arg%.pdf"
 
-SET /A num=%last_page%-(%arg%-1)*%jump% + 1000
-SET new="p%num:~1%.pdf"
+set /A num=(%END_IDX%-%arg%+1)*%JUMP% + 1000
+set new="p%num:~1%.pdf"
 
-IF EXIST %fname% (
-	ECHO REN %fname% %new%
-	REN %fname% %new%
+if EXIST %fname% (
+	echo ren %fname% %new%
+	if "%EXE_RENAME%" == "1"	ren %fname% %new%
 )
 
-EXIT /b
+exit /b
+
+

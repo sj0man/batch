@@ -3,31 +3,41 @@
 :: file name should be started "o "
 ::
 
-SETLOCAL
 
-SET total=12
-SET jump=4
+setlocal
 
-FOR /l %%i IN (1,1,%total%) DO (
-	CALL :func %%i
+if "%1" == "" (
+	set EXE_RENAME=0
+) else (
+	set EXE_RENAME=1
 )
 
-GOTO :EOF
+set START_IDX=15
+set END_IDX=24
+set JUMP=2
+
+
+for /l %%i in (%START_IDX%,1,%END_IDX%) do (
+	call :func %%i
+)
+
+goto :EOF
 
 
 
 
 :func
 
-SET arg=%1
-SET fname="o %arg%.pdf"
+set arg=%1
+set fname="o %arg%.pdf"
 
-SET /A num=(%arg%-1)*%jump%+1001
-SET new="p%num:~1%.pdf"
 
-IF EXIST %fname% (
-	ECHO REN %fname% %new%
-	REN %fname% %new%
+set /A num=(%arg%-%START_IDX%)*%JUMP%+1001
+set new="p%num:~1%.pdf"
+
+if EXIST %fname% (
+	echo ren %fname% %new%
+	if "%EXE_RENAME%" == "1"	ren %fname% %new%
 )
 
-EXIT /b
+exit /b
