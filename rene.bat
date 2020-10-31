@@ -1,6 +1,6 @@
 @echo off
 ::
-:: file name should be started "o "
+:: file name should be started "e "
 ::
 
 
@@ -34,11 +34,11 @@ goto :EOF
 
 :FUNC
 
-set ARG=%1
-set FNAME="o %ARG%.pdf"
+set IDX=%1
+set FNAME="e %IDX%.pdf"
 
 
-set /A NUM=(%arg%-%START_IDX%)*%JUMP%+1001
+set /A NUM=(%END_IDX%-%IDX%+1)*%JUMP%+1000
 set NEW="p%NUM:~1%.pdf"
 
 if exist %FNAME% (
