@@ -34,16 +34,16 @@ goto :EOF
 
 :FUNC
 
-set ARG=%1
-set FNAME="o %ARG%.pdf"
+set IDX=%1
+set FNAME="o %IDX%.pdf"
 
 
-set /A NUM=(%arg%-%START_IDX%)*%JUMP%+1001
+set /A NUM=(%IDX%-%START_IDX%)*%JUMP%+1001
 set NEW="p%NUM:~1%.pdf"
 
 if exist %FNAME% (
 	echo ren %FNAME% %NEW%
-	if "%RENAME_YES%" == "1"	ren %FNAME% %new%
+	if "%RENAME_YES%" == "1"	ren %FNAME% %NEW%
 )
 
 exit /b

@@ -43,7 +43,7 @@ set NEW="p%NUM:~1%.pdf"
 
 if exist %FNAME% (
 	echo ren %FNAME% %NEW%
-	if "%RENAME_YES%" == "1"	ren %FNAME% %new%
+	if "%RENAME_YES%" == "1"	ren %FNAME% %NEW%
 )
 
 exit /b
