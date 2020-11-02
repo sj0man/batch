@@ -22,6 +22,15 @@ if "%3" == "y" (
 	set RENAME_YES=0
 )
 
+:: check
+::
+for /l %%i in (%START_IDX%,1,%END_IDX%) do (
+	if not exist "o %%i.pdf" (
+		echo not found "o %%i.pdf"
+		goto :EOF
+	)
+)
+
 
 for /l %%i in (%START_IDX%,1,%END_IDX%) do (
 	call :FUNC %%i

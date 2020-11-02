@@ -13,6 +13,9 @@ if "%1" == "" (
 	goto :EOF
 )
 
+
+
+
 set START_IDX=%1
 set END_IDX=%2
 set JUMP=2
@@ -20,6 +23,15 @@ if "%3" == "y" (
 	set RENAME_YES=1
 ) else (
 	set RENAME_YES=0
+)
+
+:: check
+::
+for /l %%i in (%START_IDX%,1,%END_IDX%) do (
+	if not exist "e %%i.pdf" (
+		echo not found "e %%i.pdf"
+		goto :EOF
+	)
 )
 
 
@@ -36,8 +48,6 @@ goto :EOF
 
 set IDX=%1
 set FNAME="e %IDX%.pdf"
-
-
 set /A NUM=(%END_IDX%-%IDX%+1)*%JUMP%+1000
 set NEW="p%NUM:~1%.pdf"
 
