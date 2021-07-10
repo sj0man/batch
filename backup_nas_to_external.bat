@@ -49,7 +49,7 @@ echo.
 for /l %%i in (1,1,%TOTAL%) do (
 	if not exist %SRCDRV%\!SRCDIR[%%i]! (
 		echo =======================
-		echo not found %SRCDIR%\%%d
+		echo not found %SRCDIR%\!SRCDIR[%%i]!
 		echo =======================
 	) else (
 		echo %SRCDRV%\!SRCDIR[%%i]!
