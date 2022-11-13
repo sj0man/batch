@@ -12,4 +12,4 @@ if not exist %1 (
 	goto :EOF
 )
 
-certUtil -hashfile %1 MD5
+certUtil -hashfile %1 MD5 | findstr -v ":"
