@@ -1,9 +1,11 @@
 
 ====================
-업데이트 하는 방법 (최초)
+최초로 등록하는 방법
 ====================
 
 > git status
+
+> git add newfile(s)
 
 > git commit -am "message"
 
@@ -12,12 +14,12 @@
 
 
 ====================
-파일을 추가하는 하는 방법
+업데이트 하는 방법
 ====================
 
 > git status
 
-> git add newfile
+> git add newfile(s)
 
 > git commit -m "message"
 
