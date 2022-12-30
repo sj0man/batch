@@ -48,8 +48,8 @@ for %%d in ( %DIRS% ) do (
 ::
 :: It has issue that is folder name inclued space
 ::
-set SRC_GDRIVE="%HOME%\Google ï¿½ï¿½ï¿½ï¿½Ìºï¿½"
-set DEST_GDRIVE="%BKUPDIR%\Google ï¿½ï¿½ï¿½ï¿½Ìºï¿½"
+set SRC_GDRIVE="%HOME%\Google µå¶óÀÌºê"
+set DEST_GDRIVE="%BKUPDIR%\Google µå¶óÀÌºê"
 
 if not exist %SRC_GDRIVE% (
 	echo =======================
