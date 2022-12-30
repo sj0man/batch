@@ -1,13 +1,7 @@
 @echo off
 ::
-::
 :: Update from laptop to external storage.
 ::
-:: 2019-02-08
-::
-::
-::echo robocopy "%HOME%\%%d" "%BKUPDIR%\%%d" %COPYOPT% %LOGOPT%
-::if not exist %BKUPDIR%\%%d	mkdir %BKUPDIR%\%%d
 
 
 setlocal
@@ -18,22 +12,11 @@ set LOGOPT=/LOG+:%LOGDIR%\%LOGFILE% /NP /NDL
 set COPYOPT=/E /MIR /R:1 /W:1 /XA:H
 set HOME=%HOMEDRIVE%%HOMEPATH%
 
-
-set D1=Desktop
-set D2=Documents
-set D3=Downloads
-set D4=Favorites
-set D5=Pictures
-set D6=Videos
-set D7=Music
-
-set M1=Dropbox
-set M2=OneDrive
+SET DIRS=Desktop Documents Downloads Favorites Pictures Videos Music Dropbox OneDrive
 
 
 for /f "tokens=1-3 delims=- " %%A in ('echo %DATE%') do (set YY=%%A&SET MM=%%B&SET DD=%%C)
 set BKUPDIR=.\%COMPUTERNAME%_%USERNAME%_%YY%%MM%
-
 
 ::
 :: execution part
@@ -50,7 +33,7 @@ echo Begin: %T1%
 echo =======================
 echo.
 
-for %%d in (%D1% %D2% %D3% %D4% %D5% %D6% %D7% %M1% %M2%) do (
+for %%d in ( %DIRS% ) do (
 	if not exist %HOME%\%%d (
 		echo =======================
 		echo not found %HOME%\%%d
@@ -65,8 +48,8 @@ for %%d in (%D1% %D2% %D3% %D4% %D5% %D6% %D7% %M1% %M2%) do (
 ::
 :: It has issue that is folder name inclued space
 ::
-set SRC_GDRIVE="%HOME%\Google µå¶óÀÌºê"
-set DEST_GDRIVE="%BKUPDIR%\Google µå¶óÀÌºê"
+set SRC_GDRIVE="%HOME%\Google ï¿½ï¿½ï¿½ï¿½Ìºï¿½"
+set DEST_GDRIVE="%BKUPDIR%\Google ï¿½ï¿½ï¿½ï¿½Ìºï¿½"
 
 if not exist %SRC_GDRIVE% (
 	echo =======================
