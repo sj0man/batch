@@ -33,6 +33,11 @@ echo Begin: %T1%
 echo =======================
 echo.
 
+set /p ANS="Backup? "
+
+if "%ANS%" neq ""  goto :EOF
+
+
 for %%d in ( %DIRS% ) do (
 	if not exist %HOME%\%%d (
 		echo =======================
