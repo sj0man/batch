@@ -25,7 +25,8 @@ goto QUIT
 ::
 :: %0 parameter
 ::
-echo 도움말은 여기에 기술하세요.
+echo.
+echo Describe help message in this area.
 echo.
 
 :QUIT
