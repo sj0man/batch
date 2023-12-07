@@ -1,5 +1,9 @@
 @echo off
 ::
+:: Don't change the encoding of this file.
+:: encoding : euc-kr
+:: should use the EUC-KR on Windows and Web service.
+::
 :: Update from laptop to external storage.
 ::
 :: 2018-10-10
