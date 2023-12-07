@@ -7,7 +7,7 @@
 
 SETLOCAL
 
-SET tdir=".\90일후 (3달후)"
+SET tdir=".\3months"
 SET mon=%DATE:~5,2%
 SET day=%DATE:~-2%
 SET debugFlag=0
