@@ -2,7 +2,7 @@
 
 
 
-:: ºóÁÙÀ» Ã£´Â ¸í·É¾î
+:: ë¹ˆì¤„ì„ ì°¾ëŠ” ëª…ë ¹ì–´
 ::
 :: findstr /r /n "^$" 201408.csv
 ::	/r = regular expression
@@ -17,7 +17,7 @@ findstr /v /r /c:"^...LogDate" /c:"^$" infile.csv > infile.new
 copy /b header + infile outfile
 
 
-:: ÆÄÀÏ ºñ±³
+:: íŒŒì¼ ë¹„êµ
 ::
 :: fc 201408.csv 201408.new > fc.out
 

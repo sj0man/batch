@@ -3,7 +3,7 @@ rem
 rem date : 2014-08-19
 rem
 rem usage of 'for' command
-rem ÀÏ°ı ÇÁ·Î±×·¥ (batch file)¿¡¼­´Â '%%º¯¼ö'·Î »ç¿ëÇØ¾ß ÇÔ.
+rem ì¼ê´„ í”„ë¡œê·¸ë¨ (batch file)ì—ì„œëŠ” '%%ë³€ìˆ˜'ë¡œ ì‚¬ìš©í•´ì•¼ í•¨.
 rem
 
 
