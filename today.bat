@@ -26,19 +26,19 @@ endlocal
 ::
 :: it should be included the space after &.
 ::
-SETLOCAL
-for /f "tokens=1-4 delims=:. " %%A in ('echo %TIME%') do (set HH=%%A& SET MI=%%B& SET SS=%%C& SET MS=%%D)
-ECHO.
-ECHO %HH%%MI%%SS%%MS%
-ENDLOCAL
+setlocal
+for /f "tokens=1-4 delims=:. " %%a in ('echo %time%') do (set hh=%%a& set mi=%%b& set ss=%%c& set ms=%%d)
+echo.
+echo %hh%%mi%%ss%%ms%
+endlocal
 
-SETLOCAL
-SET HH=%TIME:~0,2%
-SET MI=%TIME:~3,2%
-SET SS=%TIME:~6,2%
-SET MS=%TIME:~9,2%
+setlocal
+set hh=%time:~0,2%
+set mi=%time:~3,2%
+set ss=%time:~6,2%
+set ms=%time:~9,2%
 
-ECHO.
-ECHO %HH%%MI%%SS%%MS%
-ENDLOCAL
+echo.
+echo %hh%%mi%%ss%%ms%
+endlocal
 

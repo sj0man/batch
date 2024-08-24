@@ -1,34 +1,34 @@
-@ECHO OFF
+@echo off
 ::
 :: 2019-06-26
 ::
 
-SETLOCAL
+setlocal
 
-IF "%1" == "" (
-	SET this_year=%DATE:~0,4%
-) ELSE (
-	SET this_year=%1
+if "%1" == "" (
+	set THIS_YEAR=%date:~0,4%
+) else (
+	set THIS_YEAR=%1
 )
 
 
-FOR /l %%i IN (1,1,12) DO (
-	CALL :func %%i
+for /l %%i in (1,1,12) do (
+	call :MAKE_DIR %%i
 )
 
-GOTO :EOF
+goto :EOF
 
 
 
 
-:func
+:MAKE_DIR
 
-SET /A mon=100 + %1
-SET name=%this_year%-%mon:~1%
+set /a MON=100 + %1
+set NAME=%THIS_YEAR%-%MON:~1%
 
-IF NOT EXIST %name% (
-	ECHO MKDIR %name%
-	MKDIR %name%
+if not exist %NAME% (
+	echo mkdir %NAME%
+	mkdir %NAME%
 )
 
-EXIT /b
+exit /b
