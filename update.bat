@@ -1,9 +1,5 @@
 @echo off
 ::
-:: Don't change the encoding of this file.
-:: encoding : euc-kr
-:: should use the EUC-KR on Windows and Web service.
-::
 :: Update from laptop to external storage.
 ::
 
@@ -37,9 +33,10 @@ echo Begin: %T1%
 echo =======================
 echo.
 
-set /p ANS="Backup? "
-
-if "%ANS%" neq ""  goto :EOF
+if not exist %BKUPDIR% (
+	set /p ANS="Do you want to create %BKUPDIR% directory? "
+	if "%ANS%" neq ""	goto :EOF
+)
 
 
 for %%d in ( %DIRS% ) do (
@@ -54,21 +51,6 @@ for %%d in ( %DIRS% ) do (
 	echo.
 )
 
-::
-:: It has issue that is folder name inclued space
-::
-set SRC_GDRIVE="%HOME%\Google 드라이브"
-set DEST_GDRIVE="%BKUPDIR%\Google 드라이브"
-
-if not exist %SRC_GDRIVE% (
-	echo =======================
-	echo not found %SRC_GDRIVE%
-	echo =======================
-) else (
-	echo %SRC_GDRIVE%
-	robocopy %SRC_GDRIVE% %DEST_GDRIVE% %COPYOPT% %LOGOPT%
-)
-echo.
 
 
 :error_label
