@@ -23,6 +23,14 @@ set BKUPDIR=.\%COMPUTERNAME%_%USERNAME%_%YY%%MM%
 ::
 if not exist %HOME%		echo error %HOME% & goto :error_label
 if not exist %LOGDIR%		echo %LOGDIR% & mkdir %LOGDIR%
+
+set ANS=
+if not exist %BKUPDIR%	(
+	set /p ANS="Do you want to create %BKUPDIR% directory? "
+)
+:: if절 안에서 ANS 변수값이 확인되지 않는다.
+if "%ANS%" neq ""	goto :EOF
+
 if not exist %BKUPDIR%		echo %BKUPDIR% & mkdir %BKUPDIR%
 
 set T1=%TIME%
@@ -32,11 +40,6 @@ echo To: %BKUPDIR%
 echo Begin: %T1%
 echo =======================
 echo.
-
-if not exist %BKUPDIR% (
-	set /p ANS="Do you want to create %BKUPDIR% directory? "
-	if "%ANS%" neq ""	goto :EOF
-)
 
 
 for %%d in ( %DIRS% ) do (
